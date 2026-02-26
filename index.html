@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shawarma Beirut | Authentic Lebanese Cuisine — Richmond, ON</title>
+  <meta name="description" content="Authentic Lebanese shawarma, platters, poutines & more. Fresh daily in Richmond, Ontario. Order online or visit us today.">
+  <meta name="theme-color" content="#1a1a1a">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              50: '#fdf9ef',
+              100: '#faf0d5',
+              200: '#f4deaa',
+              300: '#edc874',
+              400: '#e5ab42',
+              500: '#dc9226',
+              600: '#c4751b',
+              700: '#a35819',
+              800: '#85461b',
+              900: '#6e3b19',
+            },
+            charcoal: {
+              50: '#f6f6f6',
+              100: '#e7e7e7',
+              200: '#d1d1d1',
+              300: '#b0b0b0',
+              400: '#888888',
+              500: '#6d6d6d',
+              600: '#5d5d5d',
+              700: '#4f4f4f',
+              800: '#454545',
+              900: '#1a1a1a',
+              950: '#0d0d0d',
+            },
+            cream: {
+              50: '#fefdfb',
+              100: '#fdf8f0',
+              200: '#faf1e1',
+              300: '#f5e6cc',
+            }
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body: ['"Inter"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom styles */
+    .hero-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(26, 26, 26, 0.65) 0%,
+        rgba(26, 26, 26, 0.4) 40%,
+        rgba(26, 26, 26, 0.7) 100%
+      );
+    }
+
+    .menu-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .menu-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .category-btn.active {
+      background-color: #1a1a1a;
+      color: #fdf8f0;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Decorative divider */
+    .ornament::before,
+    .ornament::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e5ab42, transparent);
+    }
+
+    /* Smooth image loading */
+    img {
+      transition: opacity 0.3s ease;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #fdf8f0; }
+    ::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #b0b0b0; }
+
+    /* Nav link underline animation */
+    .nav-link::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 1.5px;
+      background: #e5ab42;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="bg-cream-100 text-charcoal-900 font-body antialiased">
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="font-display text-2xl font-bold text-white tracking-wide">
+        Shawarma <span class="text-gold-400">Beirut</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#about" class="nav-link text-sm font-medium text-white/90 hover:text-gold-400 transition-colors tracking-wide uppercase">About</a>
+        <a href="#menu" class="nav-link text-sm font-medium text-white/90 hover:text-gold-400 transition-colors tracking-wide uppercase">Menu</a>
+        <a href="#gallery" class="nav-link text-sm font-medium text-white/90 hover:text-gold-400 transition-colors tracking-wide uppercase">Gallery</a>
+        <a href="#visit" class="nav-link text-sm font-medium text-white/90 hover:text-gold-400 transition-colors tracking-wide uppercase">Visit</a>
+        <a href="tel:6138383377" class="ml-2 px-5 py-2.5 bg-gold-500 hover:bg-gold-600 text-white text-sm font-semibold rounded-full transition-colors tracking-wide">
+          Order Now
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="mobile-toggle" class="md:hidden text-white focus:outline-none" aria-label="Open menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-charcoal-900/95 backdrop-blur-md border-t border-white/10">
+      <div class="px-6 py-4 flex flex-col gap-3">
+        <a href="#about" class="mobile-link text-white/90 hover:text-gold-400 py-2 text-sm uppercase tracking-wide font-medium">About</a>
+        <a href="#menu" class="mobile-link text-white/90 hover:text-gold-400 py-2 text-sm uppercase tracking-wide font-medium">Menu</a>
+        <a href="#gallery" class="mobile-link text-white/90 hover:text-gold-400 py-2 text-sm uppercase tracking-wide font-medium">Gallery</a>
+        <a href="#visit" class="mobile-link text-white/90 hover:text-gold-400 py-2 text-sm uppercase tracking-wide font-medium">Visit</a>
+        <a href="tel:6138383377" class="mt-2 px-5 py-2.5 bg-gold-500 text-white text-sm font-semibold rounded-full text-center tracking-wide">Order Now</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ========== HERO ========== -->
+  <section id="hero" class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0">
+      <img
+        src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251023_152805299-scaled.jpg"
+        alt="Shawarma Beirut signature dishes"
+        class="w-full h-full object-cover"
+      >
+      <div class="hero-overlay absolute inset-0"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative text-center px-6 max-w-3xl">
+      <p class="text-gold-400 font-body text-sm md:text-base tracking-[0.3em] uppercase mb-4 fade-in">
+        Authentic Lebanese Cuisine
+      </p>
+      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight mb-6 fade-in">
+        Shawarma<br><span class="text-gold-400">Beirut</span>
+      </h1>
+      <p class="text-white/80 text-lg md:text-xl font-light max-w-xl mx-auto mb-10 leading-relaxed fade-in">
+        Fresh shawarma, hearty platters &amp; our famous poutine — prepared with love in Richmond, Ontario.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+        <a href="#menu" class="px-8 py-3.5 bg-gold-500 hover:bg-gold-600 text-white font-semibold rounded-full transition-all text-sm tracking-wide">
+          View Our Menu
+        </a>
+        <a href="#visit" class="px-8 py-3.5 border-2 border-white/40 hover:border-gold-400 text-white hover:text-gold-400 font-semibold rounded-full transition-all text-sm tracking-wide">
+          Find Us
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about" class="py-24 md:py-32 bg-cream-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <!-- Image -->
+        <div class="fade-in">
+          <div class="relative">
+            <img
+              src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251007_161435068-scaled.jpg"
+              alt="Fresh shawarma platter"
+              class="w-full rounded-2xl shadow-lg object-cover aspect-[4/3]"
+            >
+            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gold-400 rounded-2xl -z-10"></div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="fade-in">
+          <p class="text-gold-600 text-sm tracking-[0.25em] uppercase font-medium mb-3">Our Story</p>
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-6 leading-snug">
+            A Taste of<br>Beirut in Richmond
+          </h2>
+          <p class="text-charcoal-600 leading-relaxed mb-4">
+            At Shawarma Beirut, we bring the vibrant flavours of Lebanese street food to Richmond, Ontario. Every dish is prepared fresh daily with authentic recipes passed down through generations.
+          </p>
+          <p class="text-charcoal-600 leading-relaxed mb-8">
+            From our perfectly spiced shawarma to our signature garlic sauce and creamy hummus — each plate is a journey to the heart of Beirut. Our platters are served with fragrant rice, golden potatoes, crisp salad, fresh pita bread, and all the fixings that make a meal feel like home.
+          </p>
+          <div class="flex gap-8">
+            <div>
+              <p class="font-display text-3xl font-bold text-gold-500">Fresh</p>
+              <p class="text-charcoal-500 text-sm mt-1">Daily Prep</p>
+            </div>
+            <div>
+              <p class="font-display text-3xl font-bold text-gold-500">100%</p>
+              <p class="text-charcoal-500 text-sm mt-1">Halal</p>
+            </div>
+            <div>
+              <p class="font-display text-3xl font-bold text-gold-500">Local</p>
+              <p class="text-charcoal-500 text-sm mt-1">Favourite</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== MENU ========== -->
+  <section id="menu" class="py-24 md:py-32 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- Header -->
+      <div class="text-center mb-16 fade-in">
+        <p class="text-gold-600 text-sm tracking-[0.25em] uppercase font-medium mb-3">What We Serve</p>
+        <h2 class="font-display text-3xl md:text-5xl font-bold mb-4">Our Menu</h2>
+        <div class="flex items-center gap-4 ornament max-w-xs mx-auto mt-6">
+          <span class="text-gold-400">&#10022;</span>
+        </div>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="flex flex-wrap justify-center gap-2 mb-12 fade-in">
+        <button class="category-btn active px-5 py-2 rounded-full text-sm font-medium border border-charcoal-200 transition-all" data-category="all">All</button>
+        <button class="category-btn px-5 py-2 rounded-full text-sm font-medium border border-charcoal-200 hover:bg-charcoal-900 hover:text-cream-100 transition-all" data-category="sandwiches">Sandwiches</button>
+        <button class="category-btn px-5 py-2 rounded-full text-sm font-medium border border-charcoal-200 hover:bg-charcoal-900 hover:text-cream-100 transition-all" data-category="plates">Plates</button>
+        <button class="category-btn px-5 py-2 rounded-full text-sm font-medium border border-charcoal-200 hover:bg-charcoal-900 hover:text-cream-100 transition-all" data-category="signature">Signature</button>
+        <button class="category-btn px-5 py-2 rounded-full text-sm font-medium border border-charcoal-200 hover:bg-charcoal-900 hover:text-cream-100 transition-all" data-category="poutine">Poutine</button>
+        <button class="category-btn px-5 py-2 rounded-full text-sm font-medium border border-charcoal-200 hover:bg-charcoal-900 hover:text-cream-100 transition-all" data-category="combos">Combos</button>
+        <button class="category-btn px-5 py-2 rounded-full text-sm font-medium border border-charcoal-200 hover:bg-charcoal-900 hover:text-cream-100 transition-all" data-category="sides">Sides</button>
+        <button class="category-btn px-5 py-2 rounded-full text-sm font-medium border border-charcoal-200 hover:bg-charcoal-900 hover:text-cream-100 transition-all" data-category="family">Family Meals</button>
+      </div>
+
+      <!-- Menu Grid -->
+      <div id="menu-grid" class="space-y-12">
+
+        <!-- SANDWICHES -->
+        <div class="menu-section" data-category="sandwiches">
+          <h3 class="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-8 h-[2px] bg-gold-400"></span>
+            Sandwiches
+          </h3>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Chicken Sandwich</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$8.85 / $13.29</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Small / Large — tender seasoned chicken shawarma</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Beef Sandwich</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$9.49 / $13.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Small / Large — juicy spiced beef shawarma</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Mix Sandwich</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$9.49 / $13.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Small / Large — best of both chicken &amp; beef</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Donair Sandwich</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$8.85 / $13.29</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Small / Large — classic donair with sweet sauce</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Falafel Sandwich</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$7.95 / $11.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Small / Large — crispy housemade falafel</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Veggie Sandwich</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$7.95 / $11.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Small / Large — fresh vegetables with tahini</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLATES -->
+        <div class="menu-section" data-category="plates">
+          <h3 class="font-display text-2xl font-bold mb-2 flex items-center gap-3">
+            <span class="w-8 h-[2px] bg-gold-400"></span>
+            Plates
+          </h3>
+          <p class="text-charcoal-500 text-sm mb-6 ml-11">Served with rice, potatoes, salad, garlic, hummus, pita bread &amp; veggie toppings</p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Chicken Plate</h4>
+                <span class="text-gold-600 font-semibold ml-3">$20.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Marinated chicken shawarma with all the fixings</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Beef Plate</h4>
+                <span class="text-gold-600 font-semibold ml-3">$21.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Seasoned beef shawarma, full platter</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Mix Plate</h4>
+                <span class="text-gold-600 font-semibold ml-3">$21.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Chicken &amp; beef combo platter</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Donair Plate</h4>
+                <span class="text-gold-600 font-semibold ml-3">$20.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Classic donair with sweet sauce</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Falafel Plate</h4>
+                <span class="text-gold-600 font-semibold ml-3">$19.49</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Crispy falafel, a vegetarian favourite</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Veggie Plate</h4>
+                <span class="text-gold-600 font-semibold ml-3">$19.49</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Garden-fresh vegetables with all sides</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIGNATURE PLATES -->
+        <div class="menu-section" data-category="signature">
+          <h3 class="font-display text-2xl font-bold mb-2 flex items-center gap-3">
+            <span class="w-8 h-[2px] bg-gold-400"></span>
+            Signature Plates
+          </h3>
+          <p class="text-charcoal-500 text-sm mb-6 ml-11">Customizable sides and toppings — Medium or Large</p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Chicken</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$13.99 / $18.69</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Medium / Large</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Beef</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$13.99 / $18.69</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Medium / Large</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Mix</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$13.99 / $18.69</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Medium / Large</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Donair</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$13.99 / $18.69</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Medium / Large</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Falafel</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$12.99 / $17.49</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Medium / Large</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Veggie</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$12.99 / $17.49</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Medium / Large</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- POUTINE -->
+        <div class="menu-section" data-category="poutine">
+          <h3 class="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-8 h-[2px] bg-gold-400"></span>
+            Poutine
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="menu-card bg-cream-50 rounded-xl p-5 relative overflow-hidden">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Regular Poutine</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$8.99 / $12.39</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Medium / Large — classic fries, curds &amp; gravy</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5 ring-2 ring-gold-400 relative overflow-hidden">
+              <span class="absolute top-0 right-0 bg-gold-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Famous</span>
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Shawarma Poutine</h4>
+                <span class="text-gold-600 font-semibold whitespace-nowrap ml-3">$13.99 / $18.69</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Medium / Large — our legendary creation with shawarma meat</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMBOS -->
+        <div class="menu-section" data-category="combos">
+          <h3 class="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-8 h-[2px] bg-gold-400"></span>
+            Combos
+          </h3>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Combo 1</h4>
+                <span class="text-gold-600 font-semibold ml-3">$15.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Small sandwich + side + drink</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Combo 2</h4>
+                <span class="text-gold-600 font-semibold ml-3">$29.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">2 small sandwiches + sides + 2 drinks</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Combo 3</h4>
+                <span class="text-gold-600 font-semibold ml-3">$18.69</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Large sandwich + side + drink</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Combo 4</h4>
+                <span class="text-gold-600 font-semibold ml-3">$17.35</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">2 small donair sandwiches + drink</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Combo 5</h4>
+                <span class="text-gold-600 font-semibold ml-3">$17.65</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Large salad + chicken + drink</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Chicken Salad Plate</h4>
+                <span class="text-gold-600 font-semibold ml-3">$9.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Fresh greens with grilled chicken</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIDES -->
+        <div class="menu-section" data-category="sides">
+          <h3 class="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-8 h-[2px] bg-gold-400"></span>
+            Sides &amp; Extras
+          </h3>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Meat Side (Sm)</span>
+                <span class="text-gold-600 font-semibold text-sm">$11.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Meat Side (Lg)</span>
+                <span class="text-gold-600 font-semibold text-sm">$29.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Rice (Sm)</span>
+                <span class="text-gold-600 font-semibold text-sm">$5.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Rice (Lg)</span>
+                <span class="text-gold-600 font-semibold text-sm">$11.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Salad (Sm)</span>
+                <span class="text-gold-600 font-semibold text-sm">$5.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Salad (Lg)</span>
+                <span class="text-gold-600 font-semibold text-sm">$11.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Tabbouleh</span>
+                <span class="text-gold-600 font-semibold text-sm">$5.75</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Hummus</span>
+                <span class="text-gold-600 font-semibold text-sm">$5.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Garlic Sauce</span>
+                <span class="text-gold-600 font-semibold text-sm">$5.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Turnips</span>
+                <span class="text-gold-600 font-semibold text-sm">$2.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Pickles</span>
+                <span class="text-gold-600 font-semibold text-sm">$2.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Grape Leaves (6pc)</span>
+                <span class="text-gold-600 font-semibold text-sm">$4.99</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Grape Leaves (12pc)</span>
+                <span class="text-gold-600 font-semibold text-sm">$9.49</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Baklava (1pc)</span>
+                <span class="text-gold-600 font-semibold text-sm">$2.49</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Baklava Box</span>
+                <span class="text-gold-600 font-semibold text-sm">$8.80</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Falafel (1pc)</span>
+                <span class="text-gold-600 font-semibold text-sm">$1.50</span>
+              </div>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-sm">Pita Chips Box</span>
+                <span class="text-gold-600 font-semibold text-sm">$4.49</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAMILY MEALS -->
+        <div class="menu-section" data-category="family">
+          <h3 class="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-8 h-[2px] bg-gold-400"></span>
+            Family Meals
+          </h3>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="menu-card bg-cream-50 rounded-xl p-5 ring-2 ring-gold-400 relative overflow-hidden">
+              <span class="absolute top-0 right-0 bg-gold-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Best Value</span>
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Family Platter</h4>
+                <span class="text-gold-600 font-semibold ml-3">$72.80</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Serves 5–6. Choice of chicken, beef, or mix with all sides</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Family 4 Sandwiches</h4>
+                <span class="text-gold-600 font-semibold ml-3">$47.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">4 sandwiches + sides + drinks — perfect for the family</p>
+            </div>
+            <div class="menu-card bg-cream-50 rounded-xl p-5">
+              <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-charcoal-900">Jumbo Tray</h4>
+                <span class="text-gold-600 font-semibold ml-3">$49.99</span>
+              </div>
+              <p class="text-charcoal-500 text-sm">Feeds up to 3 — loaded with your choice of meat</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== GALLERY ========== -->
+  <section id="gallery" class="py-24 md:py-32 bg-charcoal-900">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 fade-in">
+        <p class="text-gold-400 text-sm tracking-[0.25em] uppercase font-medium mb-3">Fresh Daily</p>
+        <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-4">From Our Kitchen</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 fade-in">
+        <div class="row-span-2 rounded-2xl overflow-hidden">
+          <img src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251007_161443289-scaled.jpg" alt="Shawarma platter" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251007_161247530-scaled.jpg" alt="Chicken shawarma" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251007_161225621-scaled.jpg" alt="Fresh preparation" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="row-span-2 rounded-2xl overflow-hidden">
+          <img src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251023_152816280-scaled.jpg" alt="Poutine" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251007_161219857-scaled.jpg" alt="Beef shawarma" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251007_161207483-scaled.jpg" alt="Mix plate" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251007_161203348-scaled.jpg" alt="Fresh ingredients" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251007_161215264-scaled.jpg" alt="Side dishes" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251007_161211579-scaled.jpg" alt="Hummus and garlic" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="rounded-2xl overflow-hidden">
+          <img src="https://richmondshawarmabeirut.ca/wp-content/uploads/2025/10/PXL_20251007_161152465-scaled.jpg" alt="Falafel" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== VISIT / CONTACT ========== -->
+  <section id="visit" class="py-24 md:py-32 bg-cream-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16 fade-in">
+        <p class="text-gold-600 text-sm tracking-[0.25em] uppercase font-medium mb-3">Come Hungry</p>
+        <h2 class="font-display text-3xl md:text-5xl font-bold mb-4">Visit Us</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 fade-in">
+        <!-- Location -->
+        <div class="bg-white rounded-2xl p-8 text-center shadow-sm">
+          <div class="w-14 h-14 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-5">
+            <svg class="w-6 h-6 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-bold mb-2">Location</h3>
+          <p class="text-charcoal-600 leading-relaxed">
+            6179 Perth St, Unit 500<br>
+            Richmond, ON K0A 2Z0
+          </p>
+          <a href="https://maps.google.com/?q=6179+Perth+St+Unit+500+Richmond+ON+K0A+2Z0" target="_blank" rel="noopener" class="inline-block mt-4 text-gold-600 text-sm font-medium hover:text-gold-700 transition-colors">
+            Get Directions &rarr;
+          </a>
+        </div>
+
+        <!-- Hours -->
+        <div class="bg-white rounded-2xl p-8 text-center shadow-sm">
+          <div class="w-14 h-14 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-5">
+            <svg class="w-6 h-6 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-bold mb-2">Hours</h3>
+          <div class="text-charcoal-600 space-y-1">
+            <p><span class="font-medium">Mon – Sat:</span> 11 AM – 10 PM</p>
+            <p><span class="font-medium">Sunday:</span> 11 AM – 9 PM</p>
+          </div>
+          <p class="mt-4 text-sm text-gold-600 font-medium" id="open-status"></p>
+        </div>
+
+        <!-- Contact -->
+        <div class="bg-white rounded-2xl p-8 text-center shadow-sm">
+          <div class="w-14 h-14 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-5">
+            <svg class="w-6 h-6 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-bold mb-2">Contact</h3>
+          <a href="tel:6138383377" class="text-charcoal-600 hover:text-gold-600 transition-colors text-lg">
+            (613) 838-3377
+          </a>
+          <p class="mt-4 text-charcoal-500 text-sm">Call to order or ask questions</p>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="mt-12 rounded-2xl overflow-hidden shadow-sm fade-in">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2806.5!2d-75.8386!3d45.2065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce0e0b1d8f4f5d%3A0x0!2s6179+Perth+St+Richmond+ON!5e0!3m2!1sen!2sca!4v1706000000000!5m2!1sen!2sca"
+          width="100%"
+          height="350"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="w-full"
+          title="Shawarma Beirut location on Google Maps"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="bg-charcoal-900 text-white">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="grid md:grid-cols-3 gap-12 items-start">
+        <!-- Brand -->
+        <div>
+          <h3 class="font-display text-2xl font-bold mb-3">
+            Shawarma <span class="text-gold-400">Beirut</span>
+          </h3>
+          <p class="text-charcoal-400 text-sm leading-relaxed">
+            Authentic Lebanese cuisine prepared fresh daily in Richmond, Ontario. Experience the taste of Beirut.
+          </p>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <h4 class="font-semibold text-sm tracking-wider uppercase mb-4 text-charcoal-300">Quick Links</h4>
+          <div class="space-y-2">
+            <a href="#about" class="block text-charcoal-400 hover:text-gold-400 transition-colors text-sm">About</a>
+            <a href="#menu" class="block text-charcoal-400 hover:text-gold-400 transition-colors text-sm">Menu</a>
+            <a href="#gallery" class="block text-charcoal-400 hover:text-gold-400 transition-colors text-sm">Gallery</a>
+            <a href="#visit" class="block text-charcoal-400 hover:text-gold-400 transition-colors text-sm">Visit Us</a>
+          </div>
+        </div>
+
+        <!-- Contact info -->
+        <div>
+          <h4 class="font-semibold text-sm tracking-wider uppercase mb-4 text-charcoal-300">Get In Touch</h4>
+          <div class="space-y-2 text-sm text-charcoal-400">
+            <p>6179 Perth St, Unit 500</p>
+            <p>Richmond, ON K0A 2Z0</p>
+            <a href="tel:6138383377" class="block hover:text-gold-400 transition-colors">(613) 838-3377</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-charcoal-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-charcoal-500 text-xs">
+          &copy; 2026 Shawarma Beirut. All rights reserved.
+        </p>
+        <p class="text-charcoal-600 text-xs">
+          Powered by <a href="https://zalena.ai" target="_blank" rel="noopener" class="text-gold-400 hover:text-gold-300 transition-colors">Zalena AI</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+    // --- Navbar scroll effect ---
+    const navbar = document.getElementById('navbar');
+    const handleScroll = () => {
+      if (window.scrollY > 80) {
+        navbar.classList.add('bg-charcoal-900/95', 'backdrop-blur-md', 'shadow-lg');
+        navbar.classList.remove('bg-transparent');
+      } else {
+        navbar.classList.remove('bg-charcoal-900/95', 'backdrop-blur-md', 'shadow-lg');
+        navbar.classList.add('bg-transparent');
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    // --- Mobile menu toggle ---
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // --- Menu category filter ---
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const menuSections = document.querySelectorAll('.menu-section');
+
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+
+        // Update active button
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter sections
+        menuSections.forEach(section => {
+          if (category === 'all' || section.dataset.category === category) {
+            section.style.display = '';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // --- Fade-in on scroll (Intersection Observer) ---
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    fadeElements.forEach(el => observer.observe(el));
+
+    // --- Open/Closed status ---
+    const statusEl = document.getElementById('open-status');
+    const now = new Date();
+    const day = now.getDay(); // 0 = Sunday
+    const hour = now.getHours();
+    const closeHour = day === 0 ? 21 : 22;
+    const isOpen = hour >= 11 && hour < closeHour;
+    if (statusEl) {
+      statusEl.textContent = isOpen ? 'Open Now' : 'Currently Closed';
+      statusEl.classList.add(isOpen ? 'text-green-600' : 'text-red-500');
+      statusEl.classList.remove(isOpen ? 'text-gold-600' : '');
+    }
+  </script>
+
+</body>
+</html>
